@@ -55,37 +55,38 @@ Read `cv.md`. Ejecuta TODOS los bloques:
 
 Clasifica la oferta en uno de los 6 arquetipos. Si es híbrido, indica los 2 más cercanos.
 
-**Los 6 arquetipos (todos igual de válidos):**
+**The 6 archetypes (all equally valid):**
 
-| Arquetipo | Ejes temáticos | Qué compran |
-|-----------|----------------|-------------|
-| **AI Platform / LLMOps Engineer** | Evaluation, observability, reliability, pipelines | Alguien que ponga AI en producción con métricas |
-| **Agentic Workflows / Automation** | HITL, tooling, orchestration, multi-agent | Alguien que construya sistemas de agentes fiables |
-| **Technical AI Product Manager** | GenAI/Agents, PRDs, discovery, delivery | Alguien que traduzca negocio → producto AI |
-| **AI Solutions Architect** | Hyperautomation, enterprise, integrations | Alguien que diseñe arquitecturas AI end-to-end |
-| **AI Forward Deployed Engineer** | Client-facing, fast delivery, prototyping | Alguien que entregue soluciones AI a clientes rápido |
-| **AI Transformation Lead** | Change management, adoption, org enablement | Alguien que lidere el cambio AI en una organización |
+| Archetype | Thematic axes | What they buy |
+|-----------|---------------|---------------|
+| **Senior DevOps Engineer** | CI/CD, IaC, cloud infrastructure, automation | Someone who ships reliably and keeps systems running |
+| **Site Reliability Engineer (SRE)** | SLIs/SLOs, incident response, toil reduction, observability | Someone who owns reliability as a product |
+| **Platform Engineer** | Internal developer platforms, Kubernetes, Helm, golden paths | Someone who improves developer velocity at scale |
+| **Cloud Engineer** | AWS/GCP/Azure, Terraform, cost optimisation, security | Someone who designs and operates scalable cloud foundations |
+| **Infrastructure Engineer** | Networking, storage, compute, IaC at scale | Someone who builds the backbone everything else runs on |
+| **DevSecOps / Security Engineer** | Shift-left security, SAST/DAST, compliance automation | Someone who bakes security into the pipeline, not on top |
 
-**Framing adaptativo:**
+**Adaptive framing:**
 
-> **Las métricas concretas se leen de `cv.md` + `article-digest.md` en cada evaluación. NUNCA hardcodear números aquí.**
+> **Concrete metrics are read from `cv.md` + `article-digest.md` at evaluation time. NEVER hardcode numbers here.**
 
-| Si el rol es... | Emphasize about the candidate... | Fuentes de proof points |
-|-----------------|--------------------------|--------------------------|
-| Platform / LLMOps | Builder de sistemas en producción, observability, evals, closed-loop | article-digest.md + cv.md |
-| Agentic / Automation | Orquestación multi-agente, HITL, reliability, cost | article-digest.md + cv.md |
-| Technical AI PM | Product discovery, PRDs, métricas, stakeholder mgmt | cv.md + article-digest.md |
-| Solutions Architect | Diseño de sistemas, integrations, enterprise-ready | article-digest.md + cv.md |
-| Forward Deployed Engineer | Fast delivery, client-facing, prototype → prod | cv.md + article-digest.md |
-| AI Transformation Lead | Change management, team enablement, adoption | cv.md + article-digest.md |
+| If the role is... | Emphasize about the candidate... | Proof point sources |
+|-------------------|----------------------------------|---------------------|
+| DevOps Engineer | CI/CD pipelines, automation breadth, deployment frequency, IaC | cv.md + article-digest.md |
+| SRE | Reliability ownership, SLI/SLO definition, incident lead, toil automation | cv.md + article-digest.md |
+| Platform Engineer | Kubernetes/EKS platform, Helm charts, IDP design, developer UX metrics | article-digest.md + cv.md |
+| Cloud Engineer | AWS architecture, Terraform modules, cost optimisation, security posture | cv.md + article-digest.md |
+| Infrastructure Engineer | Network design, scalability, IaC maturity, multi-region operations | cv.md + article-digest.md |
+| DevSecOps / Security | Shift-left tooling, compliance-as-code, vulnerability pipeline integration | cv.md + article-digest.md |
 
-**Ventaja transversal**: Enmarcar perfil como **"Technical builder"** que adapta su framing al rol:
-- Para PM: "builder que reduce incertidumbre con prototipos y luego productioniza con disciplina"
-- Para FDE: "builder que entrega fast con observability y métricas desde día 1"
-- Para SA: "builder que diseña sistemas end-to-end con experiencia real en integrations"
-- Para LLMOps: "builder que pone AI en producción con closed-loop quality systems — leer métricas de article-digest.md"
+**Cross-cutting advantage**: Frame profile as **"Platform-minded reliability engineer with cloud-native depth"** that adapts framing to the role:
+- For SRE: "engineer who treats reliability as a product -- SLOs, runbooks, toil elimination as first-class deliverables"
+- For DevOps: "operator who automates everything that repeats and instruments everything that matters"
+- For Platform: "builder who designs internal platforms that make developers faster and deployments safer"
+- For Cloud: "architect who designs AWS systems with cost, security, and operational simplicity from day one"
+- For DevSecOps: "practitioner who shifts security left without slowing delivery -- compliance by design, not audit"
 
-Convertir "builder" en señal profesional, no en "hobby maker". El framing cambia, la verdad es la misma.
+Convert "DevOps generalist" into a professional signal: broad coverage with deep Kubernetes/AWS/IaC expertise and real production track record.
 
 #### Bloque A — Resumen del Rol
 
@@ -95,13 +96,13 @@ Tabla con: Arquetipo detectado, Domain, Function, Seniority, Remote, Team size, 
 
 Read `cv.md`. Tabla con cada requisito del JD mapeado a líneas exactas del CV o keys de i18n.ts.
 
-**Adaptado al arquetipo:**
-- FDE → priorizar delivery rápida y client-facing
-- SA → priorizar diseño de sistemas e integrations
-- PM → priorizar product discovery y métricas
-- LLMOps → priorizar evals, observability, pipelines
-- Agentic → priorizar multi-agent, HITL, orchestration
-- Transformation → priorizar change management, adoption, scaling
+**Adapted to archetype:**
+- DevOps → prioritise CI/CD depth, automation coverage, deployment metrics
+- SRE → prioritise reliability ownership, SLOs, incident track record
+- Platform → prioritise Kubernetes/EKS expertise, IDP design, developer velocity
+- Cloud → prioritise AWS architecture, Terraform maturity, cost/security posture
+- Infrastructure → prioritise IaC scale, networking, multi-region operations
+- DevSecOps → prioritise shift-left tooling, compliance automation, vulnerability pipelines
 
 Sección de **gaps** con estrategia de mitigación para cada uno:
 1. ¿Es hard blocker o nice-to-have?

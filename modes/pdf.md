@@ -8,7 +8,8 @@
 4. Detecta idioma del JD → idioma del CV (EN default)
 5. Detecta ubicación empresa → formato papel:
    - US/Canada → `letter`
-   - Resto del mundo → `a4`
+   - UK/Europe/Resto del mundo → `a4`
+   - UK default: A4, date format "Mon YYYY – Mon YYYY" (e.g. "Feb 2024 – Present")
 6. Detecta arquetipo del rol → adapta framing
 7. Reescribe Professional Summary inyectando keywords del JD + exit narrative bridge ("Built and sold a business. Now applying systems thinking to [domain del JD].")
 8. Selecciona top 3-4 proyectos más relevantes para la oferta
@@ -20,6 +21,22 @@
 14. Ejecuta: `node generate-pdf.mjs /tmp/cv-candidate-{company}.html output/cv-candidate-{company}-{YYYY-MM-DD}.pdf --format={letter|a4}`
 15. Reporta: ruta del PDF, nº páginas, % cobertura de keywords
 
+## Cover Letter (always generated alongside the CV)
+
+After the CV PDF is generated, **always** generate a cover letter PDF using `modes/cover-letter.md`.
+
+- Output: `output/cover-letter-{company-slug}-{YYYY-MM-DD}.pdf`
+- Same paper format as CV (A4 or letter)
+- Must be 1 page — if it renders as 2, trim and regenerate
+- Report both PDF paths together to the user
+
+## Reglas de estilo (legibilidad humana)
+
+- **No em dashes (" —")** in CV content. Use a colon (":"), comma (","), or rewrite the sentence instead.
+  - Bad: "DevSecOps — IAM, access controls" → Good: "DevSecOps: IAM, access controls"
+  - Bad: "pipelines — building CI/CD" → Good: "pipelines, building CI/CD" or split into two sentences
+  - Bad: "HCNA — Huawei Certified" → Good: "HCNA, Huawei Certified"
+
 ## Reglas ATS (parseo limpio)
 
 - Layout single-column (sin sidebars, sin columnas paralelas)
@@ -29,6 +46,9 @@
 - UTF-8, texto seleccionable (no rasterizado)
 - Sin tablas anidadas
 - Keywords del JD distribuidas: Summary (top 5), primer bullet de cada rol, Skills section
+- **LinkedIn aparece UNA SOLA VEZ** — en el contact row del header. NUNCA repetirlo en body, Skills, ni Profile
+- **No incluir emojis** en el cuerpo del CV (LinkedIn, email, phone son plain text en el HTML)
+- **Core Competencies como bullet list** — más parseable por ATS que tags/chips
 
 ## Diseño del PDF
 
@@ -70,15 +90,15 @@ Usar el template en `cv-template.html`. Reemplazar los placeholders `{{...}}` co
 | `{{PAGE_WIDTH}}` | `8.5in` (letter) o `210mm` (A4) |
 | `{{NAME}}` | (from profile.yml) |
 | `{{EMAIL}}` | (from profile.yml) |
-| `{{LINKEDIN_URL}}` | [from profile.yml] |
-| `{{LINKEDIN_DISPLAY}}` | [from profile.yml] |
-| `{{PORTFOLIO_URL}}` | [from profile.yml] (o /es según idioma) |
-| `{{PORTFOLIO_DISPLAY}}` | [from profile.yml] (o /es según idioma) |
-| `{{LOCATION}}` | [from profile.yml] |
+| `{{PHONE}}` | (from profile.yml — plain text, no emoji) |
+| `{{LINKEDIN_URL}}` | full URL from profile.yml (e.g. `https://linkedin.com/in/...`) |
+| `{{LINKEDIN_DISPLAY}}` | display text only (e.g. `linkedin.com/in/...`) |
+| `{{PORTFOLIO_SECTION}}` | If portfolio_url set: `<span class="separator">\|</span><a href="URL">DISPLAY</a>` — else **empty string** |
+| `{{LOCATION}}` | (from profile.yml) |
 | `{{SECTION_SUMMARY}}` | Professional Summary / Resumen Profesional |
 | `{{SUMMARY_TEXT}}` | Summary personalizado con keywords |
 | `{{SECTION_COMPETENCIES}}` | Core Competencies / Competencias Core |
-| `{{COMPETENCIES}}` | `<span class="competency-tag">keyword</span>` × 6-8 |
+| `{{COMPETENCIES}}` | `<li>keyword phrase</li>` × 6-8 (plain bullet list items, NO span tags) |
 | `{{SECTION_EXPERIENCE}}` | Work Experience / Experiencia Laboral |
 | `{{EXPERIENCE}}` | HTML de cada trabajo con bullets reordenados |
 | `{{SECTION_PROJECTS}}` | Projects / Proyectos |

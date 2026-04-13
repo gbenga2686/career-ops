@@ -135,21 +135,19 @@
   }
 
   /* === CORE COMPETENCIES === */
-  .competencies-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
+  .competencies-list {
+    list-style: disc;
+    padding-left: 18px;
+    column-count: 2;
+    column-gap: 24px;
+    margin: 0;
   }
 
-  .competency-tag {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 10px;
-    font-weight: 500;
-    color: hsl(187, 74%, 28%);
-    background: hsl(187, 40%, 95%);
-    padding: 3px 10px;
-    border-radius: 3px;
-    border: 1px solid hsl(187, 40%, 88%);
+  .competencies-list li {
+    font-size: 10.5px;
+    color: #333;
+    margin-bottom: 3px;
+    break-inside: avoid;
   }
 
   /* === WORK EXPERIENCE === */
@@ -339,9 +337,10 @@
     <div class="contact-row">
       <span>{{EMAIL}}</span>
       <span class="separator">|</span>
-      <a href="{{LINKEDIN_URL}}">{{LINKEDIN_DISPLAY}}</a>
+      <span>{{PHONE}}</span>
       <span class="separator">|</span>
-      <a href="{{PORTFOLIO_URL}}">{{PORTFOLIO_DISPLAY}}</a>
+      <a href="{{LINKEDIN_URL}}">{{LINKEDIN_DISPLAY}}</a>
+      {{PORTFOLIO_SECTION}}
       <span class="separator">|</span>
       <span>{{LOCATION}}</span>
     </div>
@@ -356,9 +355,9 @@
   <!-- CORE COMPETENCIES -->
   <div class="section">
     <div class="section-title">{{SECTION_COMPETENCIES}}</div>
-    <div class="competencies-grid">
+    <ul class="competencies-list">
       {{COMPETENCIES}}
-    </div>
+    </ul>
   </div>
 
   <!-- WORK EXPERIENCE -->

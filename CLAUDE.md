@@ -1,4 +1,96 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
 # Career-Ops -- AI Job Search Pipeline
+
+## Commands
+
+```bash
+# Install dependencies (only Playwright)
+npm install
+npx playwright install chromium   # Required for PDF generation and scraping
+
+# Pipeline maintenance (run after batch evaluations)
+npm run merge        # Merge batch/tracker-additions/*.tsv into applications.md
+npm run verify       # Health check: statuses, duplicates, broken report links
+npm run normalize    # Clean non-canonical statuses in applications.md
+npm run dedup        # Remove duplicate tracker entries
+
+# PDF generation (standalone, called by modes internally)
+node generate-pdf.mjs <input.html> <output.pdf> [--format=letter|a4]
+
+# Pre-session setup check
+npm run sync-check   # Validates cv.md, profile.yml, and no hardcoded metrics
+
+# Dashboard (Go TUI)
+cd dashboard && go build -o career-dashboard . && ./career-dashboard
+```
+
+All scripts support `--dry-run` to preview changes without writing. There is no build step, linter, or test suite — data integrity is validated through the npm run verify/normalize/dedup scripts.
+
+## Architecture
+
+### How modes work
+
+Every skill mode is a markdown file in `modes/`. When the user triggers a mode (by pasting a URL, asking for a scan, etc.), Claude reads the relevant `.md` file and executes the instructions within it. `modes/_shared.md` is the backbone — it contains the 6 archetypes, scoring rubric, framing rules, and compensation guidance that all other modes import conceptually.
+
+**Mode dispatch** (Claude selects the mode based on intent):
+
+| Trigger | Mode file |
+|---------|-----------|
+| Paste URL or JD text | `modes/auto-pipeline.md` |
+| "Evaluate this offer" | `modes/oferta.md` |
+| "Compare offers" | `modes/ofertas.md` |
+| "Search for jobs" | `modes/scan.md` |
+| "Process pending URLs" | `modes/pipeline.md` |
+| "Generate my CV / PDF" | `modes/pdf.md` |
+| "Batch process" | `modes/batch.md` |
+| "Research company" | `modes/deep.md` |
+| "LinkedIn message" | `modes/contacto.md` |
+| "Fill application form" | `modes/apply.md` |
+| "Evaluate course/cert" | `modes/training.md` |
+| "Evaluate project idea" | `modes/project.md` |
+| "Show my applications" | `modes/tracker.md` |
+| "Generate cover letter" | `modes/cover-letter.md` |
+
+### Data flow: single offer (auto-pipeline)
+
+```
+URL/JD → [Playwright → WebFetch → WebSearch] → Extract JD text
+       → Read cv.md + article-digest.md + config/profile.yml
+       → Detect archetype (from modes/_shared.md)
+       → A-F evaluation blocks → score
+       → Save report: reports/{###}-{company-slug}-{YYYY-MM-DD}.md
+       → If score ≥ 3.0: generate CV PDF + Cover Letter PDF via generate-pdf.mjs
+       → Write TSV to batch/tracker-additions/{num}-{slug}.tsv
+       → [Later] npm run merge → updates data/applications.md
+```
+
+### Data flow: batch processing
+
+Batch mode (`modes/batch.md`) spawns headless `claude -p` workers using `batch/batch-prompt.md` as the system prompt. Each worker is self-contained (no external file access). Workers write results to `batch/tracker-additions/`. The conductor tracks state in `batch/batch-state.tsv` (resumable). After all workers finish, run `npm run merge`.
+
+### Data flow: scanner
+
+```
+scan.md → Level 1: Playwright to careers pages (tracked_companies in portals.yml)
+        → Level 2: Greenhouse API for companies with api: field
+        → Level 3: WebSearch using search_queries in portals.yml
+        → Filter by title_filter.positive/negative
+        → Dedup against scan-history.tsv + applications.md + pipeline.md
+        → Append new offers to data/pipeline.md
+```
+
+### Key architectural constraints
+
+- **Tracker additions are write-once via TSV** — never add rows directly to `applications.md`; always write a TSV file and run `npm run merge`. You CAN edit existing rows to update status/notes.
+- **Report numbers are sequential** — find the highest existing number in `reports/` and increment by 1.
+- **JD extraction priority** — always try Playwright first, WebFetch second, WebSearch last.
+- **Metrics must be dynamic** — always read from `cv.md` or `article-digest.md` at runtime; never hardcode numbers in mode files or prompts.
+- **Batch workers are isolated** — `claude -p` workers cannot use Playwright; they use WebFetch and mark reports as `**Verification:** unconfirmed (batch mode)`.
+
+---
 
 ## Origin
 
@@ -129,6 +221,7 @@ This system is designed to be customized by YOU (Claude). When the user asks you
 | Wants LinkedIn outreach | `contacto` |
 | Asks for company research | `deep` |
 | Wants to generate CV/PDF | `pdf` |
+| Wants a cover letter | `cover-letter` |
 | Evaluates a course/cert | `training` |
 | Evaluates portfolio project | `project` |
 | Asks about application status | `tracker` |
