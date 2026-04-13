@@ -22,8 +22,14 @@ Ejecutar exactamente igual que el modo `oferta` (leer `modes/oferta.md` para tod
 ## Paso 2 — Guardar Report .md
 Guardar la evaluación completa en `reports/{###}-{company-slug}-{YYYY-MM-DD}.md` (ver formato en `modes/oferta.md`).
 
-## Paso 3 — Generar PDF
+## Paso 3 — Generar PDF + Cover Letter
 Ejecutar el pipeline completo de `pdf` (leer `modes/pdf.md`).
+
+Esto incluye la generación automática del cover letter PDF (ver `modes/cover-letter.md`):
+- CV PDF → `output/cv-{candidate}-{company}-{YYYY-MM-DD}.pdf`
+- Cover Letter PDF → `output/cover-letter-{company-slug}-{YYYY-MM-DD}.pdf`
+
+Ambos deben completarse antes de pasar al Paso 4.
 
 ## Paso 4 — Draft Application Answers (solo si score >= 4.5)
 

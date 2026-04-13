@@ -30,19 +30,12 @@ The skill applies with EQUAL rigor to ALL target roles. None is primary or secon
 
 | Archetype | Thematic axes | What they buy |
 |-----------|---------------|---------------|
-| **AI Platform / LLMOps Engineer** | Evaluation, observability, reliability, pipelines | Someone who puts AI in production with metrics |
-| **Agentic Workflows / Automation** | HITL, tooling, orchestration, multi-agent | Someone who builds reliable agent systems |
-| **Technical AI Product Manager** | GenAI/Agents, PRDs, discovery, delivery | Someone who translates business to AI product |
-| **AI Solutions Architect** | Hyperautomation, enterprise, integrations | Someone who designs end-to-end AI architectures |
-| **AI Forward Deployed Engineer** | Client-facing, fast delivery, prototyping | Someone who delivers AI solutions to clients fast |
-| **AI Transformation Lead** | Change management, adoption, org enablement | Someone who leads AI transformation in an org |
-
-<!-- [CUSTOMIZE] Edit the archetypes above to match YOUR target roles.
-     For example, if you're a backend engineer, replace with:
-     - Senior Backend Engineer
-     - Staff Platform Engineer
-     - Engineering Manager
-     etc. -->
+| **Senior DevOps Engineer** | CI/CD, IaC, cloud infrastructure, automation | Someone who ships reliably and keeps systems running |
+| **Site Reliability Engineer (SRE)** | SLIs/SLOs, incident response, toil reduction, observability | Someone who owns reliability as a product |
+| **Platform Engineer** | Internal developer platforms, golden paths, Kubernetes, Helm | Someone who improves developer velocity at scale |
+| **Cloud Engineer** | AWS/GCP/Azure, multi-cloud, cost optimisation, security | Someone who designs and operates scalable cloud foundations |
+| **Infrastructure Engineer** | Networking, storage, compute, IaC at scale | Someone who builds the backbone everything else runs on |
+| **DevSecOps / Security Engineer** | Shift-left security, SAST/DAST, compliance automation | Someone who bakes security into the pipeline, not on top |
 
 ### Adaptive Framing by Archetype
 
@@ -50,12 +43,12 @@ The skill applies with EQUAL rigor to ALL target roles. None is primary or secon
 
 | If the role is... | Emphasize about the candidate... | Proof point sources |
 |-------------------|----------------------------------|---------------------|
-| Platform / LLMOps | Production systems builder, observability, evals, closed-loop | article-digest.md + cv.md |
-| Agentic / Automation | Multi-agent orchestration, HITL, reliability, cost | article-digest.md + cv.md |
-| Technical AI PM | Product discovery, PRDs, metrics, stakeholder mgmt | cv.md + article-digest.md |
-| Solutions Architect | System design, integrations, enterprise-ready | article-digest.md + cv.md |
-| Forward Deployed Engineer | Fast delivery, client-facing, prototype to prod | cv.md + article-digest.md |
-| AI Transformation Lead | Change management, team enablement, adoption | cv.md + article-digest.md |
+| DevOps Engineer | CI/CD pipelines, automation breadth, deployment frequency, IaC | cv.md + article-digest.md |
+| SRE | Reliability ownership, SLI/SLO definition, incident lead, toil automation | cv.md + article-digest.md |
+| Platform Engineer | Kubernetes/EKS platform, Helm charts, IDP design, developer UX metrics | article-digest.md + cv.md |
+| Cloud Engineer | AWS architecture, Terraform modules, cost optimisation, security posture | cv.md + article-digest.md |
+| Infrastructure Engineer | Network design, scalability, IaC maturity, multi-region operations | cv.md + article-digest.md |
+| DevSecOps / Security | Shift-left tooling, compliance-as-code, vulnerability pipeline integration | cv.md + article-digest.md |
 
 <!-- [CUSTOMIZE] Map YOUR specific projects/articles to each archetype above -->
 
@@ -75,13 +68,14 @@ Use the candidate's exit story from `config/profile.yml` to frame ALL content:
 
 ### Cross-cutting Advantage
 
-Frame profile as **"Technical builder with real-world proof"** that adapts framing to the role:
-- For PM: "builder who reduces uncertainty with prototypes then productionizes with discipline"
-- For FDE: "builder who delivers fast with observability and metrics from day 1"
-- For SA: "builder who designs end-to-end systems with real integration experience"
-- For LLMOps: "builder who puts AI in production with closed-loop quality systems"
+Frame profile as **"Platform-minded reliability engineer with cloud-native depth"** that adapts framing to the role:
+- For SRE: "engineer who treats reliability as a product -- SLOs, runbooks, and toil elimination as first-class deliverables"
+- For DevOps: "operator who automates everything that repeats and instruments everything that matters"
+- For Platform: "builder who designs internal platforms that make developers faster and deployments safer"
+- For Cloud: "architect who designs AWS systems with cost, security, and operational simplicity from day one"
+- For DevSecOps: "practitioner who shifts security left without slowing delivery -- compliance by design, not audit"
 
-Convert "builder" into a professional signal, not a "hobby maker". Real proof points make this credible.
+Convert "DevOps generalist" into a professional signal: broad coverage with deep Kubernetes/AWS/IaC expertise and real production track record.
 
 ### Portfolio as Proof Point (use in high-value applications)
 
