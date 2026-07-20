@@ -135,11 +135,13 @@
   }
 
   /* === CORE COMPETENCIES === */
+  /* ATS-safe: single column. CSS multi-column (column-count) causes PDF text
+     extractors to interleave the left/right columns and garble reading order,
+     which trips 2026 ATS parsers. Keep this list single-column. */
   .competencies-list {
     list-style: disc;
     padding-left: 18px;
-    column-count: 2;
-    column-gap: 24px;
+    column-count: 1;
     margin: 0;
   }
 

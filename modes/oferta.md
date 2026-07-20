@@ -4,7 +4,7 @@ Cuando el candidato pega una oferta (texto o URL), entregar SIEMPRE los 6 bloque
 
 ## Paso 0 — Detección de Arquetipo
 
-Clasificar la oferta en uno de los 6 arquetipos (ver `_shared.md`). Si es híbrido, indicar los 2 más cercanos. Esto determina:
+Clasificar la oferta en uno de los 7 arquetipos (ver `_shared.md`). Si es híbrido, indicar los 2 más cercanos. Esto determina:
 - Qué proof points priorizar en bloque B
 - Cómo reescribir el summary en bloque E
 - Qué historias STAR preparar en bloque F
@@ -24,13 +24,21 @@ Tabla con:
 
 Lee `cv.md`. Crea tabla con cada requisito del JD mapeado a líneas exactas del CV.
 
-**Adaptado al arquetipo:**
-- Si FDE → priorizar proof points de delivery rápida y client-facing
-- Si SA → priorizar diseño de sistemas e integrations
-- Si PM → priorizar product discovery y métricas
-- Si LLMOps → priorizar evals, observability, pipelines
-- Si Agentic → priorizar multi-agent, HITL, orchestration
-- Si Transformation → priorizar change management, adoption, scaling
+**Adaptado al arquetipo (ver `_shared.md`):**
+- Si Platform Engineer → priorizar IDP/golden paths, Kubernetes/Helm, developer velocity
+- Si SRE → priorizar SLI/SLO, incident response, toil reduction, observability
+- Si DevOps → priorizar CI/CD, IaC, automation breadth, deployment frequency
+- Si Cloud Engineer → priorizar arquitectura AWS/GCP/Azure, Terraform, FinOps/coste, seguridad
+- Si DevSecOps → priorizar shift-left, SAST/DAST, compliance-as-code, supply-chain security
+- Si MLOps / AI Infra → priorizar ML pipelines, GPU/serving infra, model registry, AI-SRE
+
+### ATS Match Score (obligatorio)
+
+Aplicar las **Bullet & Keyword Rules (ATS 2026)** de `_shared.md`:
+1. Extraer las hard skills y nombres de herramientas exactos del JD (10-20 términos).
+2. Marcar cada uno como: ✅ presente verbatim en cv.md · 🟡 presente como sinónimo/adyacente · ❌ ausente.
+3. **ATS Match = % de términos ✅ o 🟡 sobre el total.** Reportarlo como `ATS Match: NN% (X/Y keywords)`.
+4. Listar los términos ❌ que el candidato SÍ puede cubrir con lenguaje real → son los que el CV afinado debe incorporar (verbatim, sin keyword stuffing) en el Bloque E.
 
 Sección de **gaps** con estrategia de mitigación para cada uno. Para cada gap:
 1. ¿Es un hard blocker o un nice-to-have?
@@ -73,13 +81,13 @@ The **Reflection** column captures what was learned or what would be done differ
 
 **Story Bank:** If `interview-prep/story-bank.md` exists, check if any of these stories are already there. If not, append new ones. Over time this builds a reusable bank of 5-10 master stories that can be adapted to any interview question.
 
-**Seleccionadas y enmarcadas según el arquetipo:**
-- FDE → enfatizar velocidad de entrega y client-facing
-- SA → enfatizar decisiones de arquitectura
-- PM → enfatizar discovery y trade-offs
-- LLMOps → enfatizar métricas, evals, production hardening
-- Agentic → enfatizar orchestration, error handling, HITL
-- Transformation → enfatizar adopción, cambio organizacional
+**Seleccionadas y enmarcadas según el arquetipo (ver `_shared.md`):**
+- Platform Engineer → enfatizar diseño de plataforma, golden paths, developer velocity
+- SRE → enfatizar SLO/SLI, liderazgo de incidentes, eliminación de toil
+- DevOps → enfatizar automatización de CI/CD, IaC, frecuencia de despliegue
+- Cloud Engineer → enfatizar arquitectura cloud, Terraform, optimización de coste (FinOps)
+- DevSecOps → enfatizar shift-left, compliance-as-code, seguridad de la cadena de suministro
+- MLOps / AI Infra → enfatizar productización de ML, fiabilidad de modelos, AI-SRE
 
 Incluir también:
 - 1 case study recomendado (cuál de sus proyectos presentar y cómo)
@@ -107,6 +115,7 @@ Guardar evaluación completa en `reports/{###}-{company-slug}-{YYYY-MM-DD}.md`.
 **Fecha:** {YYYY-MM-DD}
 **Arquetipo:** {detectado}
 **Score:** {X/5}
+**ATS Match:** {NN% (X/Y keywords)}
 **PDF:** {ruta o pendiente}
 
 ---

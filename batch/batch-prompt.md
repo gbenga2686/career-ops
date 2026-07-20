@@ -53,18 +53,19 @@ Read `cv.md`. Ejecuta TODOS los bloques:
 
 #### Paso 0 — Detección de Arquetipo
 
-Clasifica la oferta en uno de los 6 arquetipos. Si es híbrido, indica los 2 más cercanos.
+Clasifica la oferta en uno de los 7 arquetipos. Si es híbrido, indica los 2 más cercanos.
 
-**The 6 archetypes (all equally valid):**
+**The 7 archetypes (all equally valid):**
 
 | Archetype | Thematic axes | What they buy |
 |-----------|---------------|---------------|
 | **Senior DevOps Engineer** | CI/CD, IaC, cloud infrastructure, automation | Someone who ships reliably and keeps systems running |
 | **Site Reliability Engineer (SRE)** | SLIs/SLOs, incident response, toil reduction, observability | Someone who owns reliability as a product |
 | **Platform Engineer** | Internal developer platforms, Kubernetes, Helm, golden paths | Someone who improves developer velocity at scale |
-| **Cloud Engineer** | AWS/GCP/Azure, Terraform, cost optimisation, security | Someone who designs and operates scalable cloud foundations |
+| **Cloud Engineer** | AWS/GCP/Azure, Terraform, cost optimisation (FinOps), security | Someone who designs and operates scalable cloud foundations |
+| **DevSecOps / Security Engineer** | Shift-left security, SAST/DAST, compliance-as-code, supply-chain security | Someone who bakes security into the pipeline, not on top |
+| **MLOps / AI Infrastructure Engineer** | ML pipelines, GPU clusters, model registries, feature stores, AI-SRE | Someone who productionizes AI and keeps models reliable |
 | **Infrastructure Engineer** | Networking, storage, compute, IaC at scale | Someone who builds the backbone everything else runs on |
-| **DevSecOps / Security Engineer** | Shift-left security, SAST/DAST, compliance automation | Someone who bakes security into the pipeline, not on top |
 
 **Adaptive framing:**
 
@@ -103,6 +104,14 @@ Read `cv.md`. Tabla con cada requisito del JD mapeado a líneas exactas del CV o
 - Cloud → prioritise AWS architecture, Terraform maturity, cost/security posture
 - Infrastructure → prioritise IaC scale, networking, multi-region operations
 - DevSecOps → prioritise shift-left tooling, compliance automation, vulnerability pipelines
+- MLOps / AI Infra → prioritise ML pipeline automation, GPU/serving infra, model registry, AI-SRE reliability
+
+**ATS Match Score (2026 — obligatorio).** Hiring now has two readers: a parser and an LLM ranking layer.
+1. Extract the JD's exact hard skills and tool names (10-20 terms).
+2. Mark each: ✅ present verbatim in cv.md · 🟡 present as synonym/adjacent · ❌ absent.
+3. **ATS Match = % of ✅ or 🟡 over total.** Report as `ATS Match: NN% (X/Y keywords)` in the report header.
+4. List the ❌ terms the candidate CAN legitimately cover → these go verbatim into the tailored CV (mirror the JD, do NOT keyword-stuff; hidden text/keyword walls are flagged as manipulative).
+5. Every experience bullet = tool + scale + quantified result. No metric → weak bullet. Metrics from cv.md/article-digest.md only.
 
 Sección de **gaps** con estrategia de mitigación para cada uno:
 1. ¿Es hard blocker o nice-to-have?
@@ -167,6 +176,7 @@ Donde `{company-slug}` es el nombre de empresa en lowercase, sin espacios, con g
 **Fecha:** {{DATE}}
 **Arquetipo:** {detectado}
 **Score:** {X/5}
+**ATS Match:** {NN% (X/Y keywords)}
 **URL:** {URL de la oferta original}
 **PDF:** career-ops/output/cv-candidate-{company-slug}-{{DATE}}.pdf
 **Batch ID:** {{ID}}

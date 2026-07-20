@@ -30,12 +30,15 @@ The skill applies with EQUAL rigor to ALL target roles. None is primary or secon
 
 | Archetype | Thematic axes | What they buy |
 |-----------|---------------|---------------|
+| **Platform Engineer** | Internal developer platforms, golden paths, Kubernetes, Helm, IDP/Backstage | Someone who improves developer velocity at scale |
+| **Site Reliability Engineer (SRE)** | SLIs/SLOs, incident response, toil reduction, observability, AIOps | Someone who owns reliability as a product |
 | **Senior DevOps Engineer** | CI/CD, IaC, cloud infrastructure, automation | Someone who ships reliably and keeps systems running |
-| **Site Reliability Engineer (SRE)** | SLIs/SLOs, incident response, toil reduction, observability | Someone who owns reliability as a product |
-| **Platform Engineer** | Internal developer platforms, golden paths, Kubernetes, Helm | Someone who improves developer velocity at scale |
-| **Cloud Engineer** | AWS/GCP/Azure, multi-cloud, cost optimisation, security | Someone who designs and operates scalable cloud foundations |
+| **Cloud Engineer** | AWS/GCP/Azure, multi-cloud, cost optimisation (FinOps), security | Someone who designs and operates scalable cloud foundations |
+| **DevSecOps / Security Engineer** | Shift-left security, SAST/DAST, compliance-as-code, supply-chain security | Someone who bakes security into the pipeline, not on top |
+| **MLOps / AI Infrastructure Engineer** | ML pipelines, GPU clusters, model registries, feature stores, AI-SRE | Someone who productionizes AI and keeps models reliable |
 | **Infrastructure Engineer** | Networking, storage, compute, IaC at scale | Someone who builds the backbone everything else runs on |
-| **DevSecOps / Security Engineer** | Shift-left security, SAST/DAST, compliance automation | Someone who bakes security into the pipeline, not on top |
+
+> **2026 market signal (refresh via WebSearch each quarter).** Ordered by demand + comp. Platform Engineering has become its own discipline (≈80% of large orgs run platform teams) — lead with it over generic "DevOps." **MLOps / AI-SRE commands a premium** (Gartner: 85% of enterprises on AI-SRE tooling by 2029). **DevSecOps** is critically scarce in regulated sectors (finance, healthcare, defence). **FinOps / cost governance** is now expected in senior bullets, not a nice-to-have. Core stack unchanged: Kubernetes, Terraform (Pulumi rising), CI/CD, SLO/SLI, incident response. When a JD leans into any of these, raise the match weight.
 
 ### Adaptive Framing by Archetype
 
@@ -49,8 +52,19 @@ The skill applies with EQUAL rigor to ALL target roles. None is primary or secon
 | Cloud Engineer | AWS architecture, Terraform modules, cost optimisation, security posture | cv.md + article-digest.md |
 | Infrastructure Engineer | Network design, scalability, IaC maturity, multi-region operations | cv.md + article-digest.md |
 | DevSecOps / Security | Shift-left tooling, compliance-as-code, vulnerability pipeline integration | cv.md + article-digest.md |
+| MLOps / AI Infra | ML pipeline automation, GPU/serving infra, model registry, feature store, AI-SRE reliability | article-digest.md + cv.md |
 
 <!-- [CUSTOMIZE] Map YOUR specific projects/articles to each archetype above -->
+
+### Bullet & Keyword Rules (ATS 2026 — apply in every CV, cover letter, and STAR story)
+
+Modern hiring has **two readers**: a parser and an LLM ranking layer that sits between the parser and the human. Write for both.
+
+1. **Three-pillar bullet structure** — every experience bullet = *tool/technology used in production* + *scale indicator* + *quantified business result*. Example: "Ran Kubernetes across 12 clusters serving 40k req/s, cutting deploy time 40%." No metric → weak bullet. Metrics come from `cv.md` / `article-digest.md` only — never invent.
+2. **Mirror the JD's real language, don't stuff it.** The LLM layer understands synonyms ("P&L ownership" ≈ "managed budget"), so weave exact JD terms *naturally* into the summary, skills, and bullets. Hidden text, keyword walls, and unnatural repetition are now *actively flagged as manipulative* — never do this.
+3. **Semantic clarity beats keyword density.** Vague bullets compress into "mush" when the LLM summarizes; specific, quantified bullets compress into memorable summaries a recruiter sees. Lead the summary and first bullets with the highest-impact, most role-relevant proof (recruiters scan in 7-8s).
+4. **ATS-safe formatting is mandatory:** single-column, standard headings (Summary/Experience/Skills), text-based PDF, no tables/text-boxes/graphics for content. (The CV template already enforces this — do not reintroduce multi-column content.)
+5. **Per-JD keyword pass:** before generating a CV/cover letter, extract the JD's key hard skills and exact tool names; confirm each present-in-the-candidate one appears verbatim somewhere in the CV. Report coverage as the ATS-match score (see scoring).
 
 ### Exit Narrative (use in ALL framings)
 
@@ -146,7 +160,7 @@ If the candidate has a live demo/dashboard (check profile.yml), offer access in 
 
 ### ALWAYS
 
-0. **Cover letter:** If the form has an option to attach or write a cover letter, ALWAYS include one. Generate PDF with the same visual design as the CV. Content: JD quotes mapped to proof points, links to relevant case studies. 1 page max.
+0. **Cover letter (2026 policy — on demand, not by default):** Cover letters are read by only ~26% of hiring managers and are near-universally skipped in tech, but still matter *when the posting explicitly requests one* or at the shortlist stage. So: generate a cover letter when (a) the user asks, (b) the application form has a cover-letter field, or (c) the JD explicitly requires one — NOT automatically for every evaluation. When you do generate it, it must be specific enough that it could not have been written for anyone else (the first 2-3 sentences are the only part read). Same visual design as the CV, JD quotes mapped to proof points, 1 page max.
 1. Read cv.md and article-digest.md (if exists) before evaluating any offer
 1b. **First evaluation of each session:** Run `node cv-sync-check.mjs` with Bash. If it reports warnings, notify the candidate before continuing
 2. Detect the role archetype and adapt framing
