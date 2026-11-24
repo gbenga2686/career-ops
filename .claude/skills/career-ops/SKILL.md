@@ -28,6 +28,7 @@ Determine the mode from `{{mode}}`:
 | `scan` | `scan` |
 | `batch` | `batch` |
 | `cover-letter` | `cover-letter` |
+| `interview-prep` (or "prep me for [company] interview") | `interview-prep` |
 
 **Auto-pipeline detection:** If `{{mode}}` is not a known sub-command AND contains JD text (keywords: "responsibilities", "requirements", "qualifications", "about the role", "we're looking for", company name + role) or a URL to a JD, execute `auto-pipeline`.
 
@@ -57,6 +58,7 @@ Available commands:
   /career-ops scan          → Scan portals and discover new offers
   /career-ops batch         → Batch processing with parallel workers
   /career-ops cover-letter  → Generate tailored cover letter PDF (requires JD in context)
+  /career-ops interview-prep → Tailored interview prep doc + branded PDF (output/interview-prep/<date>/)
 
 Inbox: add URLs to data/pipeline.md → /career-ops pipeline
 Or paste a JD directly to run the full pipeline.
@@ -76,7 +78,7 @@ Applies to: `auto-pipeline`, `oferta`, `ofertas`, `pdf`, `contacto`, `apply`, `p
 ### Standalone modes (only their mode file):
 Read `modes/{mode}.md`
 
-Applies to: `tracker`, `deep`, `training`, `project`, `cover-letter`
+Applies to: `tracker`, `deep`, `training`, `project`, `cover-letter`, `interview-prep`
 
 ### Modes delegated to subagent:
 For `scan`, `apply` (with Playwright), and `pipeline` (3+ URLs): launch as Agent with the content of `_shared.md` + `modes/{mode}.md` injected into the subagent prompt.

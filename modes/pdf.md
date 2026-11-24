@@ -18,24 +18,28 @@
 11. Inyecta keywords naturalmente en logros existentes (NUNCA inventa)
 12. Genera HTML completo desde template + contenido personalizado
 13. Escribe HTML a `/tmp/cv-candidate-{company}.html`
-14. Ejecuta: `node generate-pdf.mjs /tmp/cv-candidate-{company}.html output/cv-candidate-{company}-{YYYY-MM-DD}.pdf --format={letter|a4}`
-15. Reporta: ruta del PDF, nº páginas, % cobertura de keywords
+14. Captura la fecha actual de generación: `TODAY=$(date +%Y-%m-%d)` — esta es la fecha real en que se genera el PDF (puede diferir de la fecha del report si la medianoche ha pasado durante la sesión).
+15. Crea el directorio de salida: `mkdir -p output/$TODAY/`
+16. Ejecuta: `node generate-pdf.mjs /tmp/cv-candidate-{company}.html output/$TODAY/cv-gbenga-olusoto-{company}-$TODAY.pdf --format={letter|a4}`
+17. Reporta: ruta del PDF, nº páginas, % cobertura de keywords
 
-## Cover Letter (always generated alongside the CV)
+## Cover Letter (2026 policy — conditional, not automatic)
 
-After the CV PDF is generated, **always** generate a cover letter PDF using `modes/cover-letter.md`.
+After the CV PDF is generated, generate a cover letter PDF (`modes/cover-letter.md`) **only if**: the user asked, the application form has a cover-letter field, or the JD explicitly requires one. Otherwise skip it — see `_shared.md` ALWAYS rule 0 (only ~26% of hiring managers read cover letters; a sharper CV is the better investment).
 
-- Output: `output/cover-letter-{company-slug}-{YYYY-MM-DD}.pdf`
+When one IS generated:
+- Output: `output/$TODAY/cover-letter-gbenga-olusoto-{company-slug}-$TODAY.pdf` (same `$TODAY` captured at CV generation step)
 - Same paper format as CV (A4 or letter)
 - Must be 1 page — if it renders as 2, trim and regenerate
 - Report both PDF paths together to the user
 
 ## Reglas de estilo (legibilidad humana)
 
-- **No em dashes (" —")** in CV content. Use a colon (":"), comma (","), or rewrite the sentence instead.
-  - Bad: "DevSecOps — IAM, access controls" → Good: "DevSecOps: IAM, access controls"
-  - Bad: "pipelines — building CI/CD" → Good: "pipelines, building CI/CD" or split into two sentences
+- **No em dashes (" —")** in CV or cover letter content. Replace with a comma (",") — this is the preferred choice. Use a colon (":") only when introducing a list. Never use em dashes.
+  - Bad: "DevSecOps — IAM, access controls" → Good: "DevSecOps, IAM, access controls"
+  - Bad: "pipelines — building CI/CD" → Good: "pipelines, building CI/CD"
   - Bad: "HCNA — Huawei Certified" → Good: "HCNA, Huawei Certified"
+  - Bad: "from scratch — Prometheus, Grafana" → Good: "from scratch, Prometheus, Grafana"
 
 ## Reglas ATS (parseo limpio)
 

@@ -2,6 +2,23 @@
 
 Cuando el usuario pega un JD (texto o URL) sin sub-comando explícito, ejecutar TODO el pipeline en secuencia:
 
+## Paso -1 — Verificar duplicado (OBLIGATORIO, antes de cualquier otra acción)
+
+**Antes de extraer el JD o hacer ningún fetch**, leer `data/applications.md` y comprobar si ya existe una entrada con la misma empresa y rol.
+
+**Cómo detectar duplicado:**
+1. Extraer el nombre de la empresa y el título del rol del input del usuario (URL o texto del JD).
+   - Para URLs: inferir empresa del dominio o del slug (e.g. `superpayments`, `greenhouse.io/mufg`).
+   - Para texto: leer las primeras líneas del JD.
+2. Buscar en `data/applications.md` una fila donde la columna **Company** y **Role** coincidan (coincidencia parcial, sin distinción de mayúsculas).
+3. Si se encuentra una coincidencia:
+   - **DETENER el pipeline.**
+   - Notificar al usuario: `"⚠️ Already evaluated: {Company} — {Role} (#{num}, {date}, score {score}, status {status}). Report: {report_link}. Do you want to re-evaluate anyway?"`
+   - Esperar confirmación explícita antes de continuar. No proceder automáticamente.
+4. Si no hay coincidencia: continuar con Paso 0.
+
+**Nota:** La comprobación debe ser tolerante a variaciones de nombre (e.g. "Visa (Currencycloud)" coincide con "Currencycloud", "MUFG Investor Services" coincide con "MUFG"). Ante la duda, preguntar.
+
 ## Paso 0 — Extraer JD
 
 Si el input es una **URL** (no texto de JD pegado), seguir esta estrategia para extraer el contenido:
@@ -22,12 +39,22 @@ Ejecutar exactamente igual que el modo `oferta` (leer `modes/oferta.md` para tod
 ## Paso 2 — Guardar Report .md
 Guardar la evaluación completa en `reports/{###}-{company-slug}-{YYYY-MM-DD}.md` (ver formato en `modes/oferta.md`).
 
-## Paso 3 — Generar PDF + Cover Letter
+## Paso 3 — Generar PDF (+ Cover Letter solo si aplica)
 Ejecutar el pipeline completo de `pdf` (leer `modes/pdf.md`).
 
-Esto incluye la generación automática del cover letter PDF (ver `modes/cover-letter.md`):
-- CV PDF → `output/cv-{candidate}-{company}-{YYYY-MM-DD}.pdf`
-- Cover Letter PDF → `output/cover-letter-{company-slug}-{YYYY-MM-DD}.pdf`
+- CV PDF → `output/YYYY-MM-DD/cv-gbenga-olusoto-{company-slug}-{YYYY-MM-DD}.pdf` (SIEMPRE)
+- Cover Letter PDF → `output/YYYY-MM-DD/cover-letter-gbenga-olusoto-{company-slug}-{YYYY-MM-DD}.pdf`
+
+**Política de cover letter (2026):** NO generar cover letter automáticamente. Solo generarlo (ver `modes/cover-letter.md`) si:
+(a) el usuario lo pide, (b) el formulario de aplicación tiene un campo de cover letter, o (c) el JD lo exige explícitamente.
+En los demás casos, saltar el cover letter y anotar en el report `Cover letter: skipped (not requested by posting)`. Solo lo lee ~26% de los hiring managers y casi nunca en tech — genera más valor un CV afinado que un cover letter genérico.
+
+**Folder and filename date rule:**
+- `YYYY-MM-DD` = the **actual date when `node generate-pdf.mjs` runs** — capture it with `date +%Y-%m-%d` immediately before generating PDFs.
+- This is the physical creation date of the file, which may differ from the report/evaluation date if midnight passes mid-session.
+- Folder name, filename date, and physical creation date must all match.
+- Create the folder first: `mkdir -p output/$(date +%Y-%m-%d)/`
+- Example: a PDF generated on 2026-05-06 at 09:38 → `output/2026-05-06/cv-gbenga-olusoto-{slug}-2026-05-06.pdf` — even if the evaluation report is dated 2026-05-05.
 
 Ambos deben completarse antes de pasar al Paso 4.
 

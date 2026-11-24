@@ -5,8 +5,10 @@ Generate a tailored, 1-page cover letter PDF that matches the CV's visual identi
 ## Trigger
 
 - User says "generate cover letter", "write a cover letter", "cover letter for [company/role]"
-- Called internally by `auto-pipeline` (when score >= 3.0) and `pdf` mode
+- Called internally by `auto-pipeline`/`pdf` ONLY when the application form has a cover-letter field or the JD explicitly requires one (2026 policy — see `_shared.md` ALWAYS rule 0). Not auto-generated for every evaluation.
 - Requires a JD in context (text or URL)
+
+**Why on-demand:** In 2026 only ~26% of hiring managers read cover letters and tech hiring near-universally skips them; ~60% of received cover letters read as AI-generated and get discarded on sight. A tailored CV is a better use of effort. When one IS warranted, the first 2-3 sentences are the only part read, and it must be specific enough that it could not have been written for any other candidate.
 
 ## Inputs required
 
@@ -106,7 +108,9 @@ Write HTML to `/tmp/cover-letter-{company-slug}.html`
 
 Run:
 ```bash
-node generate-pdf.mjs /tmp/cover-letter-{company-slug}.html output/cover-letter-{company-slug}-{YYYY-MM-DD}.pdf --format={a4|letter}
+TODAY=$(date +%Y-%m-%d)
+mkdir -p output/$TODAY/
+node generate-pdf.mjs /tmp/cover-letter-{company-slug}.html output/$TODAY/cover-letter-gbenga-olusoto-{company-slug}-$TODAY.pdf --format={a4|letter}
 ```
 
 ### Step 5 — Report output

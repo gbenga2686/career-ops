@@ -20,6 +20,9 @@ npm run dedup        # Remove duplicate tracker entries
 # PDF generation (standalone, called by modes internally)
 node generate-pdf.mjs <input.html> <output.pdf> [--format=letter|a4]
 
+# Interview-prep PDF (Markdown → branded PDF; auto-saves to output/interview-prep/<YYYY-MM-DD>/)
+npm run prep-pdf -- interview-prep/<doc>.md [--format=a4|letter]
+
 # Pre-session setup check
 npm run sync-check   # Validates cv.md, profile.yml, and no hardcoded metrics
 
@@ -33,7 +36,7 @@ All scripts support `--dry-run` to preview changes without writing. There is no 
 
 ### How modes work
 
-Every skill mode is a markdown file in `modes/`. When the user triggers a mode (by pasting a URL, asking for a scan, etc.), Claude reads the relevant `.md` file and executes the instructions within it. `modes/_shared.md` is the backbone — it contains the 6 archetypes, scoring rubric, framing rules, and compensation guidance that all other modes import conceptually.
+Every skill mode is a markdown file in `modes/`. When the user triggers a mode (by pasting a URL, asking for a scan, etc.), Claude reads the relevant `.md` file and executes the instructions within it. `modes/_shared.md` is the backbone — it contains the 7 archetypes, scoring rubric, framing rules, and compensation guidance that all other modes import conceptually.
 
 **Mode dispatch** (Claude selects the mode based on intent):
 
@@ -53,6 +56,7 @@ Every skill mode is a markdown file in `modes/`. When the user triggers a mode (
 | "Evaluate project idea" | `modes/project.md` |
 | "Show my applications" | `modes/tracker.md` |
 | "Generate cover letter" | `modes/cover-letter.md` |
+| "Create interview prep" | `modes/interview-prep.md` |
 
 ### Data flow: single offer (auto-pipeline)
 
@@ -222,6 +226,7 @@ This system is designed to be customized by YOU (Claude). When the user asks you
 | Asks for company research | `deep` |
 | Wants to generate CV/PDF | `pdf` |
 | Wants a cover letter | `cover-letter` |
+| Wants interview prep | `interview-prep` |
 | Evaluates a course/cert | `training` |
 | Evaluates portfolio project | `project` |
 | Asks about application status | `tracker` |
@@ -265,6 +270,7 @@ This system is designed to be customized by YOU (Claude). When the user asks you
 - Node.js (mjs modules), Playwright (PDF + scraping), YAML (config), HTML/CSS (template), Markdown (data)
 - Scripts in `.mjs`, configuration in YAML
 - Output in `output/` (gitignored), Reports in `reports/`
+- **Interview-prep PDFs go in `output/interview-prep/<YYYY-MM-DD>/`** — generate via `npm run prep-pdf -- interview-prep/<doc>.md` (Markdown → branded PDF; the script creates the dated folder). The source `.md` lives in `interview-prep/`.
 - JDs in `jds/` (referenced as `local:jds/{file}` in pipeline.md)
 - Batch in `batch/` (gitignored except scripts and prompt)
 - Report numbering: sequential 3-digit zero-padded, max existing + 1
