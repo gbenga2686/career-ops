@@ -186,8 +186,11 @@ jobs:
     name: Upgrade regression gate
     # Skipped in the merge queue for cv-visual's reason above.
     needs: changes
-    # Skipped on a docs-only PR for the reason given on cv-visual.
-    if: ${{ !cancelled() && github.event_name != 'merge_group' && needs.changes.outputs.docs_only != 'true' }}
+    # Disabled on this fork: this job requires a release tag to be an
+    # ancestor of HEAD, which a deliberate history rewrite (PII/bloat
+    # cleanup) permanently severed. Re-enable if the fork's history is
+    # ever re-aligned with upstream's tags.
+    if: false
     runs-on: ubuntu-latest
     # About 3 minutes. Limited for the test job's reason.
     timeout-minutes: 20
